@@ -566,11 +566,11 @@ def repository_ensure_apt(repository):
 
 def package_update_apt(package=None):
 	if package == None:
-		sudo("apt-get --yes update")
+		sudo('DEBIAN_FRONTEND=noninteractive apt-get --yes -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" update')
 	else:
 		if type(package) in (list, tuple):
 			package = " ".join(package)
-		sudo('DEBIAN_FRONTEND=noninteractive apt-get --yes -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" upgrade ' + package)
+		sudo('DEBIAN_FRONTEND=noninteractive apt-get --yes -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" update ' + package)
 
 def package_upgrade_apt():
 	sudo('DEBIAN_FRONTEND=noninteractive apt-get --yes -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" upgrade')
